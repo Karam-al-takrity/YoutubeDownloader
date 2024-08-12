@@ -5,11 +5,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import Loader from './Loader'
 export default function Page() {
     const [ytlink, setytLink] = useState('')
     const [showFrame, setShowFrame] = useState(false)
     const [format, setFormat] = useState('')
+    const [loader, setLoader] = useState(false)
+
     function handleBlur(event: any, value: string) {
         // Extract the video ID from the YouTube URL
         const videoID = value.split('v=')[1]?.split('&')[0] // Handles additional query parameters
@@ -30,25 +32,16 @@ export default function Page() {
         handleDownload()
     }
 
-    const handleVideo = (e: any) => {
-        e.preventDefault()
-        setFormat('video')
-        handleDownload()
-    }
-    const handleAudio = async (e: any) => {
-        e.preventDefault()
-        setFormat('audio')
-        handleDownload()
-    }
-
     const handleDownload = async () => {
         try {
+            setLoader(true)
             const response = await fetch(
                 `./api/download?url=${encodeURIComponent(ytlink)}&format=${encodeURIComponent(format)}`
             )
             const data = await response.json()
             if (response.ok) {
-                toast.success('Labosi is Labosi')
+                setLoader(false)
+                toast.success('Download Finished')
             } else {
                 alert('Error: ' + data.error)
             }
@@ -100,20 +93,22 @@ export default function Page() {
                         </div>
                         <div className="flex w-[30%] flex-row justify-around">
                             <button
-                                className="rounded bg-triondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
+                                className={`rounded px-6 py-3 font-extrabold tracking-wide text-fouriondary focus:outline-none ${loader ? 'bg-secondary opacity-85' : 'bg-secondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:ring-fouriondary'}`}
                                 onClick={(e) => handleClick(e, 'video')}
+                                disabled={loader}
                             >
-                                Download Video
+                                {loader ? <Loader /> : 'Download Video'}
                             </button>
                             <button
-                                className="rounded bg-triondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
-                                onClick={(e) => handleClick(e, 'audio')}
+                                className={`rounded px-6 py-3 font-extrabold tracking-wide text-fouriondary focus:outline-none ${loader ? 'bg-secondary opacity-85' : 'bg-secondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:ring-fouriondary'}`}
+                                onClick={(e) => handleClick(e, 'video')}
+                                disabled={loader}
                             >
-                                Download Audio
+                                {loader ? <Loader /> : 'Download Audio'}
                             </button>
                         </div>
                     </form>
-                    <ToastContainer autoClose={500} stacked closeOnClick />
+                    <ToastContainer autoClose={1500} stacked closeOnClick />
                 </div>
             </div>
             <footer className="flex min-h-16 flex-row justify-center bg-secondary text-fouriondary">
