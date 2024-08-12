@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Loader from './Loader'
+
 export default function Page() {
     const [ytlink, setytLink] = useState('')
     const [showFrame, setShowFrame] = useState(false)
@@ -31,19 +32,22 @@ export default function Page() {
         } else return
         handleDownload()
     }
-
+    // toast.info('Download Started')
     const handleDownload = async () => {
+        toast.info('Download Started')
         try {
             setLoader(true)
             const response = await fetch(
                 `./api/download?url=${encodeURIComponent(ytlink)}&format=${encodeURIComponent(format)}`
             )
+
             const data = await response.json()
+
             if (response.ok) {
                 setLoader(false)
                 toast.success('Download Finished')
             } else {
-                alert('Error: ' + data.error)
+                toast.warning('Error: ' + data.error)
             }
         } catch (error) {
             console.error('An error occurred:', error)

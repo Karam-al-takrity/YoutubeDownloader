@@ -1,5 +1,7 @@
 import { exec } from 'child_process'
 import path from 'path'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function handler(req, res) {
     const { url, format } = req.query
@@ -18,6 +20,9 @@ export default function handler(req, res) {
     const outputTemplate = path.join(downloadDir, '%(title)s.%(ext)s')
 
     // Construct the yt-dlp command with the output directory
+
+    // toast.info('Download Started')
+    // ;<ToastContainer autoClose={1500} stacked closeOnClick />
 
     // const command = `yt-dlp -x --audio-format mp3 "${url}" -o "${outputTemplate}"`
 
