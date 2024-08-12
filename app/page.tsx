@@ -92,20 +92,24 @@ export default function Page() {
                             )}
                         </div>
                         <div className="flex w-[30%] flex-row justify-around">
-                            <button
-                                className={`rounded px-6 py-3 font-extrabold tracking-wide text-fouriondary focus:outline-none ${loader ? 'bg-secondary opacity-85' : 'bg-secondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:ring-fouriondary'}`}
-                                onClick={(e) => handleClick(e, 'video')}
-                                disabled={loader}
-                            >
-                                {loader ? <Loader /> : 'Download Video'}
-                            </button>
-                            <button
-                                className={`rounded px-6 py-3 font-extrabold tracking-wide text-fouriondary focus:outline-none ${loader ? 'bg-secondary opacity-85' : 'bg-secondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:ring-fouriondary'}`}
-                                onClick={(e) => handleClick(e, 'video')}
-                                disabled={loader}
-                            >
-                                {loader ? <Loader /> : 'Download Audio'}
-                            </button>
+                            {loader ? (
+                                <Loader />
+                            ) : (
+                                <>
+                                    <button
+                                        className="rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
+                                        onClick={(e) => handleClick(e, 'video')}
+                                    >
+                                        Download Video
+                                    </button>
+                                    <button
+                                        className="rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
+                                        onClick={(e) => handleClick(e, 'audio')}
+                                    >
+                                        Download Audio
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </form>
                     <ToastContainer autoClose={1500} stacked closeOnClick />
