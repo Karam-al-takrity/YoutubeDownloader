@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import images from './constants/images'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ToastContainer, toast } from 'react-toastify'
+import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Loader from './Loader'
 import DropdownList from './DropdownList'
@@ -46,7 +46,7 @@ export default function Page() {
         } else if (format === 'video') {
             msg = `Video download started`
         } else if (format === 'format') {
-            msg = 'Format list retrieved'
+            msg = 'Format list requested'
         }
         toast.info(msg)
         console.log(msg)
@@ -176,7 +176,7 @@ export default function Page() {
                             )}
                         </div>
                     </form>
-                    <ToastContainer autoClose={1500} stacked closeOnClick />
+                    <ToastContainer autoClose={2500} stacked theme="colored" />
                 </div>
             </div>
             <footer className="flex min-h-16 flex-row justify-center bg-secondary text-fouriondary">

@@ -59,6 +59,13 @@ export default function DropdownList({ data, setResolution }) {
 
     const [selectedKeys, setSelectedKeys] = useState(new Set(['text']))
 
+    const selected = useMemo(
+        () =>
+            items.find((item) => selectedKeys.has(item.key))?.label ||
+            'Select Format',
+        [selectedKeys, items]
+    )
+
     const selectedValue = React.useMemo(
         () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
         [selectedKeys]
@@ -68,7 +75,9 @@ export default function DropdownList({ data, setResolution }) {
     return (
         <Dropdown className="bg-triondary text-fouriondary" backdrop="blur">
             <DropdownTrigger className="bg-fouriondary">
-                <Button variant="bordered">Format</Button>
+                <Button variant="bordered">
+                    {selected ? selected : 'Format'}
+                </Button>
             </DropdownTrigger>
             <DropdownMenu
                 aria-label="Dynamic Actions"
