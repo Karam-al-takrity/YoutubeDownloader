@@ -7,14 +7,18 @@ import {
     DropdownItem,
     Button,
 } from '@nextui-org/react'
+
 export default function DropdownList({ data, setResolution }) {
-    // Define the resolution patterns to look for
-    const resolutionPatterns = [
-        '3840x2160',
-        '2560x1440',
-        '1920x1080',
-        '1280x720',
-    ]
+    // Define the resolution patterns and their corresponding labels
+    const resolutionMap = {
+        '3840x2160': '4K',
+        '2560x1440': '2K',
+        '1920x1080': '1080p',
+        '1280x720': '720p',
+        '854x480': '480p',
+        '640x360': '360p',
+        '426x240': '240p',
+    }
 
     // Convert data into an array of lines
     const lines = data.split('\n')
@@ -25,7 +29,7 @@ export default function DropdownList({ data, setResolution }) {
 
     // Find the lines that match the resolution pattern and extract the number at the beginning of the line
     lines.forEach((line) => {
-        resolutionPatterns.forEach((pattern) => {
+        Object.keys(resolutionMap).forEach((pattern) => {
             if (line.includes(`mp4   ${pattern}`)) {
                 if (!addedResolutions.has(pattern)) {
                     // Check if the resolution pattern has already been added
@@ -33,7 +37,7 @@ export default function DropdownList({ data, setResolution }) {
                     if (numberMatch) {
                         foundResolutions.add({
                             key: numberMatch[0],
-                            label: `${pattern}`,
+                            label: resolutionMap[pattern], // Use the friendly label
                         }) // Add the number to the Set
                         addedResolutions.add(pattern) // Mark this resolution pattern as added
                     }
