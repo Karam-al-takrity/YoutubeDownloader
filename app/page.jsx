@@ -86,7 +86,7 @@ export default function Page() {
     }, [format])
 
     return (
-        <div className="bg-red-500">
+        <div>
             <div className="min-w-screen min-h-screen bg-primary text-fouriondary">
                 <div className="text-s flex items-center justify-center gap-10 bg-secondary py-8 text-center font-Monoton md:text-4xl lg:text-6xl">
                     <div className="max-w-[40%]">
@@ -126,7 +126,7 @@ export default function Page() {
                         ) : (
                             <>
                                 <div className="my-5 flex w-full flex-col items-center justify-center">
-                                    <div className="flex flex-col gap-6 sm:flex-row">
+                                    <div className="flex flex-col gap-6 sm:flex-row mb-6">
                                         <button
                                             className="text-nowrap rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
                                             onClick={(e) =>
