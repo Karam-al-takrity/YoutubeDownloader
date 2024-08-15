@@ -17,7 +17,7 @@ export default function handler(req, res) {
         : format === 'audio'
           ? `yt-dlp -x --audio-format mp3 "${url}" -o "${outputTemplate}"`
           : format === 'video'
-            ? `yt-dlp ${resolution ? `-f ${resolution} ` : ''} "${url}" -o "${outputTemplate}"`
+            ? `yt-dlp ${resolution ? `-S ${resolution} ` : ''} "${url}" -o "${outputTemplate}"`
             : format === 'format'
               ? `yt-dlp -F "${url}"`
               : ''
