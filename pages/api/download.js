@@ -2,7 +2,7 @@ import { exec } from 'child_process'
 import path from 'path'
 
 export default function handler(req, res) {
-    const { url, format, resolution } = req.query
+    const { url, format, setFormat, resolution } = req.query
 
     if (!url) {
         return res.status(400).json({ error: 'No URL provided' })
@@ -28,7 +28,7 @@ export default function handler(req, res) {
         }
 
         const output = stdout.toString()
-
+        setFormat('')
         res.status(200).json({
             message: 'labosi',
             output: output,

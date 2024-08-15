@@ -48,11 +48,10 @@ export default function Page() {
             msg = 'Format list requested'
         }
         toast.info(msg)
-        console.log(msg)
         try {
             setLoader(true)
             const response = await fetch(
-                `./api/download?url=${encodeURIComponent(ytlink)}&format=${encodeURIComponent(format)}&resolution=${encodeURIComponent(resolution)}`
+                `./api/download?url=${encodeURIComponent(ytlink)}&format=${encodeURIComponent(format)}&resolution=${encodeURIComponent(resolution)}&setFormat=${encodeURIComponent(setFormat)}`
             )
 
             const data = await response.json()
@@ -126,7 +125,7 @@ export default function Page() {
                         ) : (
                             <>
                                 <div className="my-5 flex w-full flex-col items-center justify-center">
-                                    <div className="flex flex-col gap-6 sm:flex-row mb-6">
+                                    <div className="mb-6 flex flex-col gap-6 sm:flex-row">
                                         <button
                                             className="text-nowrap rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
                                             onClick={(e) =>

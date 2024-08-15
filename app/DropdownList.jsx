@@ -9,7 +9,6 @@ import {
 } from '@nextui-org/react'
 
 export default function DropdownList({ data, setResolution }) {
-    // Define the resolution patterns and their corresponding labels
     const resolutionMap = {
         '3840x2160': '4K',
         '2560x1440': '2K',
@@ -20,24 +19,24 @@ export default function DropdownList({ data, setResolution }) {
         '426x240': '240p',
     }
 
-    // Convert data into an array of lines
+    // data is now array of lines
     const lines = data.split('\n')
 
-    // Use a Set to keep track of unique resolutions found
+    // unique value trackeing
     const foundResolutions = new Set()
     const addedResolutions = new Set()
 
-    // Find the lines that match the resolution pattern and extract the number at the beginning of the line
+    // find match and get ID
     lines.forEach((line) => {
         Object.keys(resolutionMap).forEach((pattern) => {
             if (line.includes(`mp4   ${pattern}`)) {
                 if (!addedResolutions.has(pattern)) {
-                    // Check if the resolution pattern has already been added
-                    const numberMatch = line.match(/^\d+/) // Extracts the number at the beginning of the line
+                    // check duplications
+                    const numberMatch = line.match(/^\d+/) // ID extracted
                     if (numberMatch) {
                         foundResolutions.add({
                             key: numberMatch[0],
-                            label: resolutionMap[pattern], // Use the friendly label
+                            label: resolutionMap[pattern],
                         }) // Add the number to the Set
                         addedResolutions.add(pattern) // Mark this resolution pattern as added
                     }
