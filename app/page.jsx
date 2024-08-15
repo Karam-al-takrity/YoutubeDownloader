@@ -86,97 +86,86 @@ export default function Page() {
     }, [format])
 
     return (
-        <div>
-            <div className="min-h-screen bg-primary text-fouriondary">
-                <div className="text-s flex items-center justify-center gap-10 bg-secondary py-8 text-center font-Monoton sm:text-6xl">
-                    <h1 className="w-[40%]">
-                        Welcome To The Labosian Downloader
-                    </h1>
+        <div className="bg-red-500">
+            <div className="min-w-screen min-h-screen bg-primary text-fouriondary">
+                <div className="text-s flex items-center justify-center gap-10 bg-secondary py-8 text-center font-Monoton md:text-4xl lg:text-6xl">
+                    <div className="max-w-[40%]">
+                        <h1 className="text-center">
+                            Welcome To The Labosian Downloader
+                        </h1>
+                    </div>
                 </div>
-                <div>
-                    <form className="flex flex-col items-center">
-                        <span className="my-8 text-4xl font-extrabold">
-                            Enter Your Link Now
-                        </span>
-                        <input
-                            className="focus: my-6 h-6 w-[30%] rounded bg-secondary px-2 py-6 placeholder-fouriondary outline-none ring-fouriondary focus:ring"
-                            type="text"
-                            placeholder="Enter YouTube Video Link"
-                            value={ytlink}
-                            onChange={(e) => {
-                                setytLink(e.target.value)
-                            }}
-                            onBlur={(event) => {
-                                handleBlur(event, ytlink)
-                            }}
-                        />
-                        <div className="mb-4">
-                            {showFrame && (
-                                <iframe
-                                    className={showFrame ? 'block' : 'hidden'}
-                                    width="560"
-                                    height="315"
-                                    src={ytlink}
-                                ></iframe>
-                            )}
-                        </div>
-                        <div className="flex w-[30%] flex-row justify-around">
-                            {loader ? (
-                                <Loader />
-                            ) : (
-                                <>
-                                    <div className="flex flex-col items-center gap-6">
-                                        <div className="flex flex-row gap-6">
-                                            {/* {format && ( */}
-                                            <div className="flex flex-col items-center gap-6">
-                                                <button
-                                                    className="rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
-                                                    onClick={(e) =>
-                                                        handleClick(e, 'video')
-                                                    }
-                                                >
-                                                    Download Video
-                                                </button>
-                                            </div>
-                                            {/* )} */}
-                                            <div className="flex flex-col items-center gap-6">
-                                                <button
-                                                    className="rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
-                                                    onClick={(e) =>
-                                                        handleClick(e, 'format')
-                                                    }
-                                                >
-                                                    Format
-                                                </button>
-                                            </div>
-                                            <div className="flex flex-col items-center gap-6">
-                                                <button
-                                                    className="rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
-                                                    onClick={(e) =>
-                                                        handleClick(e, 'audio')
-                                                    }
-                                                >
-                                                    Download Audio
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div className="">
-                                            {output && (
-                                                <DropdownList
-                                                    data={output}
-                                                    setResolution={
-                                                        setResolution
-                                                    }
-                                                />
-                                            )}
-                                        </div>
+                <form className="flex flex-col items-center">
+                    <span className="my-8 text-4xl font-extrabold">
+                        Enter Your Link Now
+                    </span>
+                    <input
+                        className="focus: my-6 h-6 w-[350px] rounded bg-secondary px-2 py-6 placeholder-fouriondary outline-none ring-fouriondary focus:ring sm:w-[560px]"
+                        type="text"
+                        placeholder="Enter YouTube Video Link"
+                        value={ytlink}
+                        onChange={(e) => {
+                            setytLink(e.target.value)
+                        }}
+                        onBlur={(event) => {
+                            handleBlur(event, ytlink)
+                        }}
+                    />
+                    <div className="mb-4">
+                        {showFrame && (
+                            <iframe
+                                className="aspect-video h-[200px] w-[350px] sm:h-[315px] sm:w-[560px]"
+                                src={ytlink}
+                                allowFullScreen
+                            ></iframe>
+                        )}
+                    </div>
+                    <div className="flex flex-row items-center justify-center">
+                        {loader ? (
+                            <Loader />
+                        ) : (
+                            <>
+                                <div className="my-5 flex w-full flex-col items-center justify-center">
+                                    <div className="flex flex-col gap-6 sm:flex-row">
+                                        <button
+                                            className="text-nowrap rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
+                                            onClick={(e) =>
+                                                handleClick(e, 'video')
+                                            }
+                                        >
+                                            Download Video
+                                        </button>
+                                        <button
+                                            className="text-nowrap rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
+                                            onClick={(e) =>
+                                                handleClick(e, 'format')
+                                            }
+                                        >
+                                            Format
+                                        </button>
+                                        <button
+                                            className="text-nowrap rounded bg-secondary px-6 py-3 font-extrabold tracking-wide text-fouriondary ring ring-primary hover:bg-fouriondary hover:text-primary focus:outline-none focus:ring-fouriondary"
+                                            onClick={(e) =>
+                                                handleClick(e, 'audio')
+                                            }
+                                        >
+                                            Download Audio
+                                        </button>
                                     </div>
-                                </>
-                            )}
-                        </div>
-                    </form>
-                    <ToastContainer autoClose={2500} stacked theme="colored" />
-                </div>
+                                    <div className="">
+                                        {output && (
+                                            <DropdownList
+                                                data={output}
+                                                setResolution={setResolution}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </form>
+                <ToastContainer autoClose={2500} stacked theme="colored" />
             </div>
             <footer className="flex min-h-16 flex-row justify-center bg-secondary text-fouriondary">
                 <div className="mt-4 flex w-full flex-row justify-around">

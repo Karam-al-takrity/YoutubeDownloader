@@ -21,7 +21,6 @@ export default function handler(req, res) {
             : format === 'format'
               ? `yt-dlp -F "${url}"`
               : ''
-    // yt-dlp "${url}" -o "${outputTemplate}"
     exec(command, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`)
