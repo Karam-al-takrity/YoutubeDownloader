@@ -1,3 +1,10 @@
+# About The App 
+
+![home](https://github.com/user-attachments/assets/3edbfd92-9d59-4d29-be69-48e63814b937)
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
